@@ -1,0 +1,50 @@
+[
+  {
+    "id": 1,
+    "name": "Maths 2nd Grade",
+    "teacher": "Beth Cox",
+    "school_id": 1
+  },
+  {
+    "id": 2,
+    "name": "Science",
+    "teacher": "Martin Elliott",
+    "school_id": 1
+  },
+  {
+    "id": 3,
+    "name": "Science",
+    "teacher": "Amanda Smith",
+    "school_id": 2
+  },
+  {
+    "id": 4,
+    "name": "Sociel 4th Grade",
+    "teacher": "Mike Johnson",
+    "school_id": 2
+  },
+  {
+    "id": 5,
+    "name": "Maths",
+    "teacher": "Eliza Tanner",
+    "school_id": 2
+  },
+  {
+    "id": 6,
+    "name": "English 2nd Grade",
+    "teacher": "Linda Baker",
+    "school_id": 4
+  },
+  {
+    "id": 7,
+    "name": "Telugu 3rd Grade",
+    "teacher": "Brian Henderson",
+    "school_id": 4
+  },
+  {
+    "id": 8,
+    "name": "Hidhi 3rd Grade",
+    "teacher": "Michelle Carey",
+    "school_id": 4
+  }
+]

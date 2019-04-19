@@ -1,0 +1,32 @@
+[
+  {
+    "id": 1,
+    "name": "Master",
+    "principal": "Srinivas rao"
+  },
+  {
+    "id": 2,
+    "name": "Kings Litle",
+    "principal": "Surendra"
+  },
+  {
+    "id": 3,
+    "name": "Gvot High Scool",
+    "principal": "Venkata ramana"
+  },
+  {
+    "id": 4,
+    "name": "Sunrice",
+    "principal": "Anand"
+  },
+  {
+    "id": 5,
+    "name": "subodhaya",
+    "principal": "Prasad"
+  },
+  {
+    "id": 6,
+    "name": "KCP High Scool",
+    "principal": "Ravi Kumar"
+  }
+]
