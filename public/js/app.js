@@ -12,42 +12,16 @@
         //$locationProvider.html5Mode(true);
 
         $routeProvider
-            .when('/', {
-                templateUrl: 'templates/home.html',
-                controller: 'homeController',
-                controllerAs: 'homes'
+            .when('/wash', {
+                templateUrl: 'templates/washing.html',
+                controller: 'washCtrl'
             })
-            .when('/schools', {
-                templateUrl: 'templates/schools.html',
-                controller: 'schoolsController',
-                controllerAs: 'schools'
-            })
-            .when('/classrooms', {
-                templateUrl: 'templates/classroom.html',
-                controller: 'classroomController',
-                controllerAs: 'classrooms',
-                caseInsensitiveMatch: true
-            })
-            .when('/activities',{
-                templateUrl: 'templates/activities.html',
-                controller: 'activitiesController',
-                controllerAs: 'activities',
-                resolve: {
-                    activities: function (dataService) {
-                        return dataService.getAllActivities();
-                    }
-                }
-            })
-            .when('/classrooms/:id',{
-                template: "templates/classroomDetail.html",
-                controller: 'classroomDetailController',
-                controllerAs: 'classroom'
-            })
-            .when('/classrooms/:id/detail/:month?', {
-                templateUrl: 'templates/classrum.html',
-                controller: 'classroomDetailController',
-                controllerAs: 'classroom'
-            })
+            
+            .otherwise({
+                templateUrl: 'templates/washing.html',
+                controller: 'washCtrl'
+               
+            });
     }]);
 
 

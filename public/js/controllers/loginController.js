@@ -15,6 +15,7 @@ loginApp.controller('loginCtrl', function($http, $scope, $rootScope, $window, $l
         loginservice.redirect($scope.uname,$scope.pwd)
         .then(function(response) {
             $scope.userdetails = response;
+            Cookies.set('session_obj',$scope.userdetails);
            console.log($scope.userdetails)
 
            window.location = '/home';

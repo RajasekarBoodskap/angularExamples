@@ -1,0 +1,373 @@
+<style>
+    @import url(http://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400);
+
+    body,
+    html {
+        height: 100%;
+        font-size: 20px;
+        font-family: Source Sans Pro;
+    }
+
+    .b,
+    .bb {
+        position: absolute;
+        width: 100%;
+        height: 100%;
+        /* background: url("http://i.imgur.com/kje4L5j.jpg"); */
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+    }
+
+    .bb {
+        /* background: url("http://i.imgur.com/bDBs0et.jpg"); */
+        background-attachment: fixed;
+        background-size: cover;
+        background-position: center;
+        display: none;
+    }
+
+    #go {
+        position: absolute;
+        top: 30px;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        color: white;
+        border: 0;
+        background: #71c341;
+        width: 100px;
+        height: 30px;
+        border-radius: 6px;
+        font-size: 1rem;
+        transition: background 0.2s ease;
+        outline: none;
+    }
+
+    #go:hover {
+        background: #8ecf68;
+    }
+
+    #go:active {
+        background: #5a9f32;
+    }
+
+    .message {
+        position: absolute;
+        top: -200px;
+        left: 50%;
+        transform: translate(-50%, 0%);
+        width: 412px;
+        background: white;
+        border-radius: 8px;
+        padding: 50px;
+        text-align: center;
+        font-weight: 300;
+        color: #2c2928;
+        opacity: 0;
+        transition: top 0.3s cubic-bezier(0.31, 0.25, 0.5, 1.5), opacity 0.2s ease-in-out;
+    }
+
+    .message .check {
+        position: absolute;
+        top: 0;
+        left: 50%;
+        transform: translate(-50%, -50%) scale(4);
+        width: 120px;
+        height: 110px;
+        background: #71c341;
+        color: white;
+        font-size: 3.8rem;
+        padding-top: 10px;
+        border-radius: 50%;
+        opacity: 0;
+        transition: transform 0.2s 0.25s cubic-bezier(0.31, 0.25, 0.5, 1.5), opacity 0.1s 0.25s ease-in-out;
+    }
+
+    .message .scaledown {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 1;
+    }
+
+    .message p {
+        font-size: 1.1rem;
+        margin: 25px 0px;
+        padding: 0;
+    }
+
+    .message p:nth-child(2) {
+        font-size: 2.3rem;
+        margin: 40px 0px 0px 0px;
+    }
+
+    .message #ok {
+        position: relative;
+        color: white;
+        border: 0;
+        background: #71c341;
+        width: 100%;
+        height: 50px;
+        border-radius: 6px;
+        font-size: 1.2rem;
+        transition: background 0.2s ease;
+        outline: none;
+    }
+
+    .message #ok:hover {
+        background: #8ecf68;
+    }
+
+    .message #ok:active {
+        background: #5a9f32;
+    }
+
+    .comein {
+        top: 150px;
+        opacity: 1;
+    }
+
+    .wash_del {
+        font-size: 15px;
+        color: #727272;
+        padding: 5px;
+        float: left;
+    }
+</style>
+
+<div class="container">
+
+
+
+
+
+    <div class="col-xl-12" style="padding-top: 20px;">
+
+
+        <h5>Wash Management
+            <div class="btn-group" style="float: right">
+                <a class="btn btn-outline-secondary btn-sm" data-toggle="modal" data-target="#Adddetails"
+                    ng-click="add()"><i class="fa fa-plus"></i> <span class="hidden-xs">Add Record</span></a>
+                <a class="btn btn-outline-secondary btn-sm" data-click="panel-reload" ng-click="getwashData()"><i
+                        class="fa fa-undo"></i> Refresh</a>
+            </div>
+        </h5>
+
+
+
+
+        <hr>
+
+        <table id="example" class="table table-striped table-hover table-bordered" width="100%">
+            <thead>
+                <tr>
+                    <th>Wash ID</th>
+                    <th>Wash Name</th>
+                    <th>Power</th>
+                    <th>Stage</th>
+                    <th>Lint</th>
+                    <th>Action</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr ng-repeat="x in washData | orderBy:'_source.washid'">
+                    <td ng-click="washingData(x._id,x._source.washid,x._source.washname,x._source.power,x._source.stage,x._source.lint)"
+                        style="cursor: pointer;" data-toggle="modal" data-target="#washdetails">{{x._source.washid}}
+                    </td>
+                    <td>{{x._source.washname}}</td>
+                    <td>{{x._source.power}}</td>
+                    <td>{{x._source.stage}}</td>
+                    <td>{{x._source.lint}}</td>
+                    <td><a><i class="fa fa-edit" style="padding-left:10px;color: #007eff;cursor: pointer;"
+                                data-toggle="modal" data-target="#Editdetails"
+                                ng-click="editRecord_data(x._id,x._source.washid,x._source.washname,x._source.power,x._source.stage,x._source.lint)"></i></a>
+                        <a><i class="fa fa-trash" style="padding-left:10px;color: #df3a3a;cursor: pointer;"
+                                ng-click="deleteRecord_data(x._id)"></i></a> </td>
+            </tbody>
+        </table>
+
+
+
+        </table>
+    </div>
+</div>
+
+<div id="Adddetails" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form action="javascript:void(0)">
+                <div class="modal-header">
+                    <h4 class="modal-title">wash Machine details</h4>
+                    <button class="close" type="btn" data-dismiss="modal" aria-hidden="true">x</button>
+                </div>
+                <div class="modal-body">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">Wash ID</label>
+                                <input type="text" class="form-control input-sm" id="wash_id" name="washid"
+                                    ng-model="wash_id" placeholder="" required="required">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">Wash Name</label>
+                                <input type="text" class="form-control input-sm" id="wash_name" ng-model="wash_name"
+                                    name="washname" placeholder="" required="required">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">Power</label>
+                                <input type="text" class="form-control input-sm" id="wash_power" ng-model="wash_power"
+                                    name="power" placeholder="" required="required">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">Stage</label>
+                                <input type="text" class="form-control input-sm" id="wash_stage" ng-model="wash_stage"
+                                    name="stage" placeholder="" required="required">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">Lint</label>
+                                <input type="text" class="form-control input-sm" id="wash_lint" ng-model="wash_lint"
+                                    name="lint" placeholder="" required="required">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-warning" data-dismiss="modal" value="close">
+                    <button type="submit" class="btn btn-primary" ng-click="addRecord()">Save</button>
+
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+<div id="Editdetails" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <form id="editform" action="javascript:void(0)">
+                <div class="modal-header">
+                    <h4 class="modal-title" id="editheader"> Edit Organization details</h4>
+                    <button class="close" type="button" data-dismiss="modal" aria-hidden="true">x</button>
+                </div>
+                <div class="modal-body">
+
+
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">wash ID</label>
+                                <input type="text" class="form-control input-sm" id="edit_id" ng-model="edit_id"
+                                    name="edit_id" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">Wash Name</label>
+                                <input type="text" class="form-control input-sm" id="edit_name" ng-model="edit_name"
+                                    name="edit_name" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">Power</label>
+                                <input type="text" class="form-control input-sm" id="edit_power" ng-model="edit_power"
+                                    name="edit_power" placeholder="">
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">Stage</label>
+                                <input type="text" class="form-control input-sm" id="edit_stage" ng-model="edit_stage"
+                                    name="edit_stage" placeholder="">
+                            </div>
+                        </div>
+                    </div>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <div class="form-group">
+                                <label class="inputlabel">Lint</label>
+                                <input type="text" class="form-control input-sm" id="edit_lint" ng-model="edit_lint"
+                                    name="edit_lint" placeholder="">
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+                <div class="modal-footer">
+                    <input type="button" class="btn btn-warning" data-dismiss="modal" value="close">
+                    <button type="submit" class="btn btn-success" id="organization_edit"
+                        ng-click="editRecord()">Save</button>
+                </div>
+
+
+            </form>
+        </div>
+    </div>
+</div>
+
+
+<div id="washdetails" class="modal fade" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+
+            <div class="modal-header">
+                <h4 class="modal-title">wash Machine ID: {{washing_id}}</h4>
+                <button class="close" type="btn" data-dismiss="modal" aria-hidden="true">x</button>
+            </div>
+            <div class="modal-body">
+                <!-- <h4>washing details</h4> -->
+                <div class="row">
+                    <div class="col-lg-6 col-md-6">
+                        <img class="wash" src="/images/washing.png" height="230;width:250px;">
+                    </div>
+                    <div class="col-lg-6 col-md-6">
+                        <span class="wash_del" style="padding-top: 45px;">Wash Name : {{washing_name}}</span>
+                        <span class="wash_del">Wash Power : {{washing_power}}</span>
+                        <span class="wash_del">Wash Stage : {{washing_stage}}</span>
+                        <span class="wash_del">Wash Lint : {{washing_lint}}</span>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <input type="button" class="btn btn-warning" data-dismiss="modal" value="close">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+<div class='b'></div>
+<div class='bb'></div>
+
+<div class='message'>
+    <div class='check'>
+        &#10004;
+    </div>
+    <p>
+        Success
+    </p>
+    <p>
+        {{successMsg}}
+    </p>
+    <button id='ok' ng-click="closePopup()">
+        OK
+    </button>
+</div>
+
+<script src="/js/wash.js"></script>

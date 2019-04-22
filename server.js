@@ -14,13 +14,6 @@ var fs = require('fs');
 
 
 var routes = require('./server/routes/index');
-var schools = require('./server/routes/schools');
-var classrooms = require('./server/routes/classrooms');
-var activities = require('./server/routes/activities');
-
-
-//var schooldata = 'server/data/schools.json';
-//var classroomdata = 'server/data/classrooms.json';
 
 var us = require('underscore');
 var assert = require('assert');
@@ -31,10 +24,17 @@ var io = xpress.io;
 
 
 app.use('/', routes);
-app.use('/api/schools', schools);
-app.use('/api/classrooms', classrooms);
-app.use('/api/activities', activities);
 
+
+ //Session check each routes
+ var sessionCheck = function (req, res, next) {
+    var sessionObj = req.cookies['session_obj'];
+    if (sessionObj) {
+        next();
+    } else {
+        res.redirect('/login');
+    }
+};
 
 app.get('/login',function (req,res) {
     res.render('login')
@@ -42,5 +42,9 @@ app.get('/login',function (req,res) {
 
 app.get('/home', function (req, res) {
     res.render('layout.html');
+});
+
+app.get('/wash', sessionCheck, function (req, res) {
+    res.render('templates/washing.html');
 });
 
