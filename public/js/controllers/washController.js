@@ -193,13 +193,19 @@
             $scope.washing_power = wash_power;
             $scope.washing_stage = wash_stage;
             $scope.washing_lint = washlint;
+            $scope.url = 'https://api.boodskap.io/files/public/download/f04d3b65-e196-4f4a-8b20-6ce909639a55';
+            // washService.washImage()
+            //     .then(function(response) {
+                   
+            //         $scope.wash_img = response;
+            //        console.log($scope.wash_img);
+                  
 
-            console.log($scope.id);
-            console.log($scope.washing_id);
-            console.log($scope.washing_name);
-            console.log($scope.washing_power);
-            console.log($scope.washing_stage);
-            console.log($scope.washing_lint);
+            //     })
+            //     .catch(function (response) {
+            //         console.log(response);
+            //     })
+
         }
 
         $scope.closePopup = function(){

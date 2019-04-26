@@ -23,7 +23,8 @@
         searchByQuery: searchByQuery,
         insertRecord: insertRecord,
         updateRecord: updateRecord,
-        deleteRecord: deleteRecord
+        deleteRecord: deleteRecord,
+        washImage: washImage
 
         };
 
@@ -128,6 +129,27 @@
                     $q.reject('error Retriving schools');
                 })
             
+        }
+
+        function washImage(){
+
+            //console.log(JSON.stringify(recorddata));
+            return $http({
+                url: API_BASE_PATH + "/files/public/download/f04d3b65-e196-4f4a-8b20-6ce909639a55",
+                headers: {
+                    "Content-Type": "text/plain"
+                },
+                method : 'GET'
+            }).then(function (response) {
+                    //console.log("response:" +response.data);
+                    return response.data;
+                })
+                .catch(function (response) {
+
+                    $log.error('error retriving schools' +response.statusText);
+                    $q.reject('error Retriving schools');
+                })
+
         }
 
 

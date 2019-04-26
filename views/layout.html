@@ -24,6 +24,7 @@
 </head>
 <body ng-controller="layoutCtrl"> 
 
+    <script src="/lib/jquery-3.3.1.min.js"></script>
     <script src="/lib/angular.js"></script>
     <script src="/lib/angular-resource.js"></script>
     <script src="/lib/angular-route.js"></script>
@@ -32,7 +33,7 @@
     
     <script src="/js/app.js"></script>
 
-<script src="/lib/jquery-3.3.1.min.js"></script>
+
 <script src="/lib/popper.min.js"></script>
 <script src="/lib/bootstrap.min.js"></script>
 <script src="/lib/js.cookie.js"></script>
@@ -45,7 +46,7 @@
 <script src="/lib/boodskap.ws.js"></script>
 
 
-<script src="/lib/datatables.min.js" type="text/javascript"></script>
+<!-- <script src="/lib/datatables.min.js" type="text/javascript"></script> -->
 
 
 <script src="/js/platform-config.js"></script>
@@ -61,7 +62,11 @@
 
 <% include ./layout/header.html %>
 
-<!-- <div ng-include src="'../layout/header.html'"></div> -->
+<!-- <div ng-include="'layout/header.html'"></div> -->
+
+<!-- <div ng-include src="'./layout/header.html'"></div> -->
+
+<!-- <ng-include src="./layout/header.html"></ng-include> -->
 
 <main style="position: relative;">
     <% include ./layout/leftmenu.html %>
